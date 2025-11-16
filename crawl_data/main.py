@@ -7,7 +7,7 @@ from os.path import isdir, isfile
 import pandas as pd
 import time
 import sys
-from telebot.bot import send
+from Telegram_bot.bot import send
 
 
 #phải chạy file update.py trước

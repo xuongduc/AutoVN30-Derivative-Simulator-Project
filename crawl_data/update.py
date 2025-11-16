@@ -5,7 +5,7 @@ import time
 from datetime import date, datetime
 from os import makedirs as create
 from os.path import isdir, isfile
-from telebot.bot import send
+from Telegram_bot.bot import send
 
 print(datetime.now())
 send(f"Đã bắt update tỷ trọng và các danh sách vn30 vào: {datetime.now().time()}")
