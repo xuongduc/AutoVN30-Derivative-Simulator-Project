@@ -13,6 +13,9 @@
 ├── Telegram_bot/
 │   └── bot.py      # Chứa toàn bộ code logic để chạy bot Telegram (gửi tin nhắn).
 │
+├── Measure/
+│   └── measure.py      #chứa hàm để đo thời gian, measure(func, parameter_of_the_func).
+│
 └── README.md         # File tài liệu bạn đang đọc.
 ```
 ---
