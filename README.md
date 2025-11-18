@@ -56,4 +56,25 @@
         - Hàm dùng để lấy toàn bộ data của tick đó. Datatype : pandas.DataFrame.
     - `get_all()` : Trả về toàn bộ các ticks.
 
+4.Measure (Module):
+- Chỉ có 1 hàm tên measure.
+- Các parameter của hàm:
+    - `func`: chứa hàm cần đo thời gian chạy.
+    - Các parameter còn lại để chaỵ được hàm func.
+    - Vd:
+    ```python
+        from Measure.measure import measure
+
+        def func1(para1, para2, para3):
+            print("something")
+        
+        def func2(para1):
+            for i in range(0, 1000):
+                print(1)
+        
+
+        measue(func1, 1, 2, 3)  #func1 chứa 3 param
+
+         measue(func1, 1)    #func2 chứa 1 param
+    ```
 
