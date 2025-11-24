@@ -100,7 +100,7 @@
         pass
     ```
 
-7.main.py:
+7. main.py:
 - File python chạy thử các alpha.
 - Lưu ý: phải thay đổi `path` theo đúng vị trí folder của bạn và `path` ở đây là đường dẫn của file csv.
 - `Threshold` là số điểm để chạy hàm `stop_loss`.
