@@ -15,6 +15,15 @@
 │
 ├── Measure/
 │   └── measure.py      #chứa hàm để đo thời gian, measure(func, parameter_of_the_func).
+│ 
+├── Evaluate/
+│   └── evaluate.py
+│  
+├── Alaha/
+│   └── tes1.py
+│   └── tes2.py
+│
+├── main.py #file để chạy chính
 │
 └── README.md         # File tài liệu bạn đang đọc.
 ```
@@ -56,25 +65,50 @@
         - Hàm dùng để lấy toàn bộ data của tick đó. Datatype : pandas.DataFrame.
     - `get_all()` : Trả về toàn bộ các ticks.
 
-4.Measure (Module):
+4. Measure (Module):
 - Chỉ có 1 hàm tên measure.
 - Các parameter của hàm:
     - `func`: chứa hàm cần đo thời gian chạy.
     - Các parameter còn lại để chaỵ được hàm func.
     - Vd:
-    ```python
-        from Measure.measure import measure
+        ```python
+            from Measure.measure import measure
 
-        def func1(para1, para2, para3):
-            print("something")
-        
-        def func2(para1):
-            for i in range(0, 1000):
-                print(1)
-        
+            def func1(para1, para2, para3):
+                print("something")
+            
+            def func2(para1):
+                for i in range(0, 1000):
+                    print(1)
+            
 
-        measue(func1, 1, 2, 3)  #func1 chứa 3 param
+            measue(func1, 1, 2, 3)  #func1 chứa 3 param
 
-         measue(func1, 1)    #func2 chứa 1 param
+            measue(func1, 1)    #func2 chứa 1 param
+        ```
+5. Evaluate (Module):
+- Chứa các hàm: 
+    - `path_process(path_to_data)` : là hàm để xử lí folder data và trả về list gồm tên từng folder các ngày có trong folder data.
+    - `evaluate(alpha_func, file_path, loss_range, tick,*args, **kargs)` : làm hàm để thực hiện tính toán, có thể thêm các parameter khác nhau cho từng hàm alpha khác nhau.
+
+6. Alpha:
+- Là folder chứa các `alpha` để test.
+- Các function alpha bắt buộc phải có parameter đầu tiên là `data_chunk`. Vd:
+
+    ```python 
+    def alpha(df_chunk, **kwargs):
+        pass
     ```
+
+7.main.py:
+- File python chạy thử các alpha.
+- Lưu ý: phải thay đổi `path` theo đúng vị trí folder của bạn và `path` ở đây là đường dẫn của file csv.
+- `Threshold` là số điểm để chạy hàm `stop_loss`.
+- `tick_size` là khoảng thời gian cho 1 tick, phải để dưới dạng string. Vd: "15s". 
+- Để chạy thì sử dụng lệnh:
+    ```bash
+    python3 -m main.py
+    ```
+
+
 

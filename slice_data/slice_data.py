@@ -13,9 +13,14 @@ class Data:
     def slice(self, index) -> pd.DataFrame:
         if index < 0 or index >= len(self.group_names):
             print(f"Error: Index {index} is out of bounds. Total ticks: {len(self.group_names)}")
-            return None
-        return self.tick_groups.get_group(self.group_names[index])
-    
+            return pd.DataFrame()
+        try:
+            name = self.group_names[index]
+            return self.tick_groups.get_group(name)
+        except KeyError:
+            return pd.DataFrame()
+        
+
     def __len__(self) -> int:
         return len(self.group_names)
     
