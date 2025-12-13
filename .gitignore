@@ -1,0 +1,8 @@
+# Env, libs
+src/data
+
+Alpha/MACharts
+venv
+
+# Output
+src/output
