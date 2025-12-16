@@ -30,11 +30,12 @@ def stop_loss(prev_alpha, prev_p, p, threshold = -5):
     
 
 
-def evaluate(alpha_func, file_path, loss_range, tick,*args, **kargs):
+def execute_alpha(alpha_func, file_path, loss_range, tick,*args, **kargs):
 
     intradata = Data(file_path, tick)
     
     result = []
+    price_history = []
     data_len = len(intradata)
     
     last_alpha = 0.0
@@ -45,9 +46,11 @@ def evaluate(alpha_func, file_path, loss_range, tick,*args, **kargs):
         
         if df_chunk.empty:
             result.append(last_alpha)
+            price_history.append(price_history[-1] if price_history else 0)
             continue
 
         close_price_chunk = df_chunk['gia_khop'].iloc[-1]
+        price_history.append(close_price_chunk)
         
         is_stopped = False
         
@@ -77,5 +80,23 @@ def evaluate(alpha_func, file_path, loss_range, tick,*args, **kargs):
         result.append(current_alpha)
         last_alpha = current_alpha
 
-    return result
+    return result, price_history
+
+
+def calculate_pnl(alpha_signals, price_history, transaction_fee=0.4):
+    df = pd.DataFrame({
+        'close_price': price_history,
+        'position': alpha_signals
+    })
+    
+    df['prev_position'] = df['position'].shift(1).fillna(0)
+    df['gross_pnl'] = df['close_price'].diff().fillna(0) * df['prev_position']
+    
+    df['fees'] = df['position'].diff().abs().fillna(0) * transaction_fee
+    
+    df['net_pnl'] = df['gross_pnl'] - df['fees']
+    df['cumulative_pnl'] = df['net_pnl'].cumsum()
+    
+    return df['cumulative_pnl'].iloc[-1]
+
 

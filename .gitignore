@@ -1,6 +1,8 @@
 # Env, libs
 src/data
 
+/data
+
 Alpha/MACharts
 
 # Output
