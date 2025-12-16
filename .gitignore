@@ -2,7 +2,19 @@
 src/data
 
 Alpha/MACharts
-venv
 
 # Output
 src/output
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+__pypackages__/
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+
+# Config files
+config.ini
